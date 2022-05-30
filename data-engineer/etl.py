@@ -13,7 +13,7 @@ def read_json_data(filename, base_path=''):
     return data
 
 def _create_db_connection(host='mysqldb', port=3306, user='root', password='p@ssw0rd1', database=None):
-    max_retries = 5
+    max_retries = 10
     tries = 0
     conn_args = {'host': host, 'port': port, 'user': user, 'password': password, 'database': database}
     conn_args = {k: v for k, v in conn_args.items() if v}
@@ -25,11 +25,12 @@ def _create_db_connection(host='mysqldb', port=3306, user='root', password='p@ss
             print('Cannot connect to database. Retrying...')
             tries += 1
             db_conn = None
-            time.sleep(1)
+            time.sleep(3)
             continue
         if db_conn:
             print('Successfully connected to database!')
             break
+    
   
     return db_conn
     
